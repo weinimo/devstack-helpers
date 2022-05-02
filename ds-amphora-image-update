@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 set -xe
 
@@ -21,7 +21,7 @@ while [ $# -gt 0 ]; do
     esac
 done
 
-export DIB_REPOLOCATION_octavia_lib=/mnt/host/octavia-lib
+export DIB_REPOLOCATION_octavia_lib=/opt/stack/octavia-lib
 export DIB_REPOREF_octavia_lib=${branch:-master}
 
 name=$1
@@ -31,14 +31,14 @@ extra_args="$*"
 
 case "$name" in
 xenial)
-    args="-i ubuntu -d xenial"
+    args="-i ubuntu-minimal -d xenial"
     ;;
 bionic)
-    args="-i ubuntu -d bionic -s 3"
+    args="-i ubuntu-minimal -d bionic -s 3"
     name=ubuntu
     ;;
 ubuntu|focal)
-    args="-i ubuntu -d focal -s 3"
+    args="-i ubuntu-minimal -d focal -s 3"
     name=ubuntu
     ;;
 fedora)
@@ -97,3 +97,4 @@ done
 if [ -n "$old_id" ]; then
     openstack image delete $old_id
 fi
+
